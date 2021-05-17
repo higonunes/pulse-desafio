@@ -7,6 +7,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 @Getter
@@ -20,7 +21,7 @@ public class TransportadoraDTO implements Serializable {
     @NotEmpty(message = "O nome é obrigatório")
     private String nome;
 
-    @NotEmpty(message = "O CEP é obrigatório")
+    @NotNull(message = "O CEP é obrigatório")
     private Integer cep;
 
     private Double valorFrete;

@@ -31,17 +31,11 @@ public class Cliente implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotEmpty(message = "Nome é obrigatório")
-    @Length(min = 3, max = 80, message = "O tamanho deve ser entre 3 e 80 caracteres")
     private String nome;
 
-    @NotEmpty(message = "Email é obrigatório")
     @Column(unique = true)
-    @Email(message = "O email informado não é válido")
     private String email;
 
-    @NotNull(message = "CPF obrigatório")
-    @Column(unique = true)
     private Long cpf;
 
     @JsonIgnore

@@ -33,7 +33,7 @@ public class TransportadoraResource {
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping
-    public ResponseEntity<Transportadora> inserirTransportadora(@PathVariable @Valid TransportadoraDTO transportadoraDTO) {
+    public ResponseEntity<Transportadora> inserirTransportadora(@RequestBody @Valid TransportadoraDTO transportadoraDTO) {
         Transportadora transportadora = transportadoraService.inserirTransportadora(transportadoraDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(transportadora);
     }
