@@ -32,6 +32,9 @@ public class ProdutoService {
     }
 
     public Produto alterarProduto(Produto produto) {
+        produtoRepository.findById(produto.getId()).orElseThrow(
+                () -> new NaoEncontradoException("Produto não encontrado na base de dados")
+        );
         return produtoRepository.save(produto);
     }
 

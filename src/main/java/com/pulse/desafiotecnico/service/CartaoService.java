@@ -1,9 +1,9 @@
 package com.pulse.desafiotecnico.service;
 
+import com.pulse.desafiotecnico.domain.Cartao;
 import com.pulse.desafiotecnico.domain.Cliente;
-import com.pulse.desafiotecnico.domain.Endereco;
+import com.pulse.desafiotecnico.repositories.CartaoRepository;
 import com.pulse.desafiotecnico.repositories.ClienteRepository;
-import com.pulse.desafiotecnico.repositories.EnderecoRepository;
 import com.pulse.desafiotecnico.security.UserLogin;
 import com.pulse.desafiotecnico.service.exceptions.AuthorizationException;
 import com.pulse.desafiotecnico.service.exceptions.NaoEncontradoException;
@@ -13,15 +13,15 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class EnderecoService {
+public class CartaoService {
 
     @Autowired
-    private EnderecoRepository enderecoRepository;
+    private CartaoRepository cartaoRepository;
 
     @Autowired
     private ClienteRepository clienteRepository;
 
-    public List<Endereco> listaEnderecos() {
+    public List<Cartao> listaCartao() {
         UserLogin userLogin = LoginService.autenticado();
 
         if (userLogin == null) {
@@ -29,35 +29,35 @@ public class EnderecoService {
         }
 
         Cliente cliente = clienteRepository.findById(userLogin.getId()).get();
-        return enderecoRepository.findAllByCliente(cliente);
+
+        return cartaoRepository.findAllByCliente(cliente);
     }
 
-    public Endereco getEndereco(Long id) {
+    public Cartao getCartao(Long id) {
         UserLogin userLogin = LoginService.autenticado();
-
         if (userLogin == null) {
             throw new AuthorizationException();
         }
-
         Cliente cliente = clienteRepository.findById(userLogin.getId()).get();
-        return enderecoRepository.findByIdAndCliente(id, cliente).orElseThrow(() -> new NaoEncontradoException("Endereço não encontrado no cadastro do cliente"));
+
+        return cartaoRepository.findByIdAndCliente(id, cliente).orElseThrow(() -> new NaoEncontradoException("Cartão não encontrado no cadastro do cliente"));
     }
 
-    public Endereco alteraEndereco(Endereco endereco) {
+    public Cartao alteraCartao(Cartao cartao) {
         UserLogin userLogin = LoginService.autenticado();
         if (userLogin == null) {
             throw new AuthorizationException();
         }
         Cliente cliente = clienteRepository.findById(userLogin.getId()).get();
 
-        Endereco enderecoSalvo = enderecoRepository.findByIdAndCliente(endereco.getId(), cliente).orElseThrow(
-                () -> new NaoEncontradoException("Endereço não encontrado no cadastro do cliente")
+        Cartao cartaoSalvo = cartaoRepository.findByIdAndCliente(cartao.getId(), cliente).orElseThrow(
+                () -> new NaoEncontradoException("Cartão não encontrado no cadastro do cliente")
         );
-        endereco.setCliente(cliente);
-        return enderecoRepository.save(endereco);
+        cartao.setCliente(cliente);
+        return cartaoRepository.save(cartao);
     }
 
-    public Endereco inserirEndereco(Endereco endereco) {
+    public Cartao inserirCartao(Cartao cartao) {
         UserLogin userLogin = LoginService.autenticado();
 
         if (userLogin == null) {
@@ -66,8 +66,9 @@ public class EnderecoService {
 
         Cliente cliente = clienteRepository.findById(userLogin.getId()).get();
 
-        endereco.setId(null);
-        endereco.setCliente(cliente);
-        return enderecoRepository.save(endereco);
+        cartao.setId(null);
+        cartao.setCliente(cliente);
+        return cartaoRepository.save(cartao);
     }
+
 }

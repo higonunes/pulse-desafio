@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -22,11 +24,14 @@ public class Cartao implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotEmpty(message = "Insira o número do cartão")
     private String numero;
 
-    @JsonFormat(pattern = "dd/MM/yyyy")
+    @NotNull(message = "Insira a data de vencimento")
+    @JsonFormat(pattern = "MM/yyyy")
     private Date vencimento;
 
+    @NotNull(message = "Insira o código de verificação do cartão")
     private Integer cvv;
 
     @JsonIgnore
