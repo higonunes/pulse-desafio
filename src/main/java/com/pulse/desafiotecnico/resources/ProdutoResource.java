@@ -24,7 +24,7 @@ public class ProdutoResource {
     private ProdutoService produtoService;
 
     @GetMapping
-    public ResponseEntity<Page<Produto>> listaPedidos(
+    public ResponseEntity<Page<Produto>> listarPedidos(
             @RequestParam(value="pagina", defaultValue="0") Integer pagina,
             @RequestParam(value="quantidade", defaultValue="10") Integer quantidade,
             @RequestParam(value="ordenarPor", defaultValue="preco") String ordenarPor,
@@ -34,20 +34,20 @@ public class ProdutoResource {
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Produto> listaPedidos(@PathVariable Long id) {
+    public ResponseEntity<Produto> getPedido(@PathVariable Long id) {
         Produto produto = produtoService.getProduto(id);
         return ResponseEntity.ok().body(produto);
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping
-    public ResponseEntity<Produto> criarCarrinho(@RequestBody @Valid  Produto produto) {
+    public ResponseEntity<Produto> inserirProduto(@RequestBody @Valid  Produto produto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(produtoService.criarProduto(produto));
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping
-    public ResponseEntity<Produto> alterarCarrinho(@RequestBody @Valid Produto produto) {
+    public ResponseEntity<Produto> alterarProduto(@RequestBody @Valid Produto produto) {
         return ResponseEntity.ok().body(produtoService.alterarProduto(produto));
     }
 

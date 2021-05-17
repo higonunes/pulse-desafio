@@ -33,6 +33,8 @@ public class Endereco implements Serializable {
 
     @NotNull(message = "Número é obrigatório")
     private Integer numero;
+
+    @NotNull(message = "CEP é obrigatório")
     private Integer cep;
 
     @NotEmpty(message = "Estado é obrigatório")

@@ -33,7 +33,7 @@ public class CarrinhoAlterarDTO implements Serializable {
     }
 
     @AssertTrue(message = "É obrigatório informar o valor do frete para alterar a transportadora ou endereço")
-    private boolean isValorFrete() {
+    public boolean isValorFrete() {
         if (idTransportadora != null && valorFrete == null) {
             return false;
         } else return idEndereco == null || valorFrete != null;

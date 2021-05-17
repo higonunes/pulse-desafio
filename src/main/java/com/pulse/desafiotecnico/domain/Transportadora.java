@@ -24,6 +24,9 @@ public class Transportadora implements Serializable {
     private String nome;
 
     @JsonIgnore
+    private Integer cep;
+
+    @JsonIgnore
     @OneToMany(mappedBy = "transportadora")
     private List<Pedido> pedidos;
 

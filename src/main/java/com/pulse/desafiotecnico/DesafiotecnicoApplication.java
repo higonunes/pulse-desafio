@@ -78,7 +78,18 @@ public class DesafiotecnicoApplication implements CommandLineRunner {
 
         Transportadora transportadora = new Transportadora();
         transportadora.setNome("Correios");
+        transportadora.setCep(65032533);
         transportadoraRepository.save(transportadora);
+
+        Transportadora transportadora2 = new Transportadora();
+        transportadora2.setNome("FedEx");
+        transportadora2.setCep(65066260);
+        transportadoraRepository.save(transportadora2);
+
+        Transportadora transportadora3 = new Transportadora();
+        transportadora3.setNome("FedEx");
+        transportadora3.setCep(8090284);
+        transportadoraRepository.save(transportadora3);
 
         Produto produto1 = new Produto();
         produto1.setNome("Televisão");
