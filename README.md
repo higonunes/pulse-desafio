@@ -1,4 +1,4 @@
-#Carrinho-checkout
+# Carrinho-checkout
 
 ## Gerenciamento do projeto
 - Maven
@@ -14,6 +14,10 @@
 - Spring security
 - JWT
 
+## Documentação
+- Documentação feita com a especificação OpenApI (swagger)
+- Ferramenta utilizada: https://stoplight.io/studio/
+
 # Execução do projeto
 
 Requisitos: Java 8;
@@ -22,4 +26,4 @@ Requisitos: Java 8;
 - Baixar as depedências do maven;
 - Ajustar o perfil no arquivo de properties para spring.profiles.active = test;
 - Excutar o projeto e ele iniciará com o banco de dados H2 alocado em memória temporária;
-- Caso necessitar presistir e dados, instalar o postgres, configurar as credenciais no arquivo application-dev.properties e mudar o spring.profiles.active = dev;
+- Caso necessite persistir os dados, instalar algum banco de dados, configurar as credenciais e dialeto no arquivo application-dev.properties, incuir o drive do banco no arquivo POM.xml e mudar o spring.profiles.active = dev;
