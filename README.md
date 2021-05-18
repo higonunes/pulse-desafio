@@ -15,7 +15,7 @@
 - JWT
 
 ## Documentação
-- Documentação feita com a especificação OpenApI (swagger)
+- Documentação feita com a especificação OpenApi (swagger)
 - Ferramenta utilizada: https://stoplight.io/studio/
 
 # Execução do projeto
