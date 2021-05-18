@@ -4,6 +4,7 @@ import com.pulse.desafiotecnico.domain.Cartao;
 import com.pulse.desafiotecnico.domain.Endereco;
 import com.pulse.desafiotecnico.service.CartaoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -38,7 +39,7 @@ public class CartãoResource {
     @PostMapping
     public ResponseEntity<Cartao> inserirCartao(@Valid @RequestBody Cartao cartao) {
         Cartao cartaoNovo = cartaoService.inserirCartao(cartao);
-        return ResponseEntity.ok().body(cartaoNovo);
+        return ResponseEntity.status(HttpStatus.CREATED).body(cartaoNovo);
     }
 
 }

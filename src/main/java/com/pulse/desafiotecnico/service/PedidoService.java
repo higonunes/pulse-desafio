@@ -171,7 +171,7 @@ public class PedidoService {
             pedidoProduto.setProduto(pTemp);
             pedidoProduto.setPedido(pedido);
             pedidoProduto.setQuantidade(p.getQuantidade());
-            pedidoProduto.setPrecoPago(pTemp.getPreco());
+            pedidoProduto.setPrecoPago(pTemp.getPreco() * p.getQuantidade());
             listaProdutos.add(pedidoProduto);
 
             pTemp.setQuantidadeEstoque(pTemp.getQuantidadeEstoque() - p.getQuantidade());

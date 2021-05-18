@@ -72,7 +72,8 @@ public class CarrinhoService {
             carrinho.setEnderecoEntrega(enderecoRepository.findById(carrinhoAlterarDTO.getIdEndereco()).orElseThrow(
                     () -> new NaoEncontradoException("Endereço não encontrado")
             ));
-            carrinho.setValorFrete(carrinhoAlterarDTO.getValorFrete());
+            carrinho.setTransportadora(null);
+            carrinho.setValorFrete(0.0);
         }
 
         if (carrinhoAlterarDTO.getCupom() != null) {

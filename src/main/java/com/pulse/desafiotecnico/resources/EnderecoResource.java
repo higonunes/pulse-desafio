@@ -3,6 +3,7 @@ package com.pulse.desafiotecnico.resources;
 import com.pulse.desafiotecnico.domain.Endereco;
 import com.pulse.desafiotecnico.service.EnderecoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -37,6 +38,6 @@ public class EnderecoResource {
     @PostMapping
     public ResponseEntity<Endereco> inserirEndereco(@Valid @RequestBody Endereco endereco) {
         Endereco enderecoNovo = enderecoService.inserirEndereco(endereco);
-        return ResponseEntity.ok().body(enderecoNovo);
+        return ResponseEntity.status(HttpStatus.CREATED).body(enderecoNovo);
     }
 }
