@@ -11,7 +11,5 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 public interface ProdutoRepository extends JpaRepository<Produto, Long> {
 
-    @Transactional(readOnly = true)
-    Page<Produto> findAll(Pageable pageable);
 
 }

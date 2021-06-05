@@ -12,6 +12,7 @@ import com.pulse.desafiotecnico.service.exceptions.NaoEncontradoException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -59,17 +60,14 @@ public class PedidoService {
     @Autowired
     private CarrinhoRepository carrinhoRepository;
 
-    public Page<Pedido> listaPedidos(Integer pagina, Integer quantidade, String ordenarPor, String direcao) {
+    public Page<Pedido> listaPedidos(Pageable pageable) {
         UserLogin userLogin = LoginService.autenticado();
 
         if (userLogin == null) {
             throw new AuthorizationException();
         }
 
-        Cliente cliente = clienteRepository.findById(userLogin.getId()).get();
-
-        PageRequest pageRequest = PageRequest.of(pagina, quantidade, Sort.Direction.fromString(direcao), ordenarPor);
-        return pedidoRepository.findAllByCliente(cliente, pageRequest);
+        return pedidoRepository.findAllByCliente_Id(userLogin.getId(), pageable);
     }
 
     public Pedido getPedido(Long id) {
@@ -79,9 +77,7 @@ public class PedidoService {
             throw new AuthorizationException();
         }
 
-        Cliente cliente = clienteRepository.findById(userLogin.getId()).get();
-
-        return pedidoRepository.findAllByIdAndCliente(id, cliente).orElseThrow(
+        return pedidoRepository.findAllByIdAndCliente_Id(id, userLogin.getId()).orElseThrow(
                 () -> new NaoEncontradoException("Pedido não encontrado na base de dados")
         );
     }

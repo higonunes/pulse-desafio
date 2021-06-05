@@ -5,6 +5,8 @@ import com.pulse.desafiotecnico.dto.pedido.PedidoNovoDTO;
 import com.pulse.desafiotecnico.service.PedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,12 +27,8 @@ public class PedidoResource {
     }
 
     @GetMapping
-    public ResponseEntity<Page<Pedido>> listaPedidos(
-            @RequestParam(value="pagina", defaultValue="0") Integer pagina,
-            @RequestParam(value="quantidade", defaultValue="10") Integer quantidade,
-            @RequestParam(value="ordenarPor", defaultValue="data") String ordenarPor,
-            @RequestParam(value="direcao", defaultValue="DESC")  String direcao) {
-        Page<Pedido> listaPedidos = pedidoService.listaPedidos(pagina, quantidade, ordenarPor, direcao);
+    public ResponseEntity<Page<Pedido>> listaPedidos(@PageableDefault(sort = "data") Pageable pageable) {
+        Page<Pedido> listaPedidos = pedidoService.listaPedidos(pageable);
         return ResponseEntity.ok().body(listaPedidos);
     }
 

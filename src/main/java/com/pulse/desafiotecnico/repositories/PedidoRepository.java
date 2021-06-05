@@ -14,9 +14,9 @@ import java.util.Optional;
 public interface PedidoRepository extends JpaRepository<Pedido, Long> {
 
     @Transactional(readOnly = true)
-    Page<Pedido> findAllByCliente(Cliente cliente, Pageable pageable);
+    Page<Pedido> findAllByCliente_Id(Long id, Pageable pageable);
 
     @Transactional(readOnly = true)
-    Optional<Pedido> findAllByIdAndCliente(Long id, Cliente cliente);
+    Optional<Pedido> findAllByIdAndCliente_Id(Long id, Long clienteId);
 
 }

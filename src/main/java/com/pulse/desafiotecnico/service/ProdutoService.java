@@ -6,6 +6,7 @@ import com.pulse.desafiotecnico.service.exceptions.NaoEncontradoException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -15,9 +16,8 @@ public class ProdutoService {
     @Autowired
     private ProdutoRepository produtoRepository;
 
-    public Page<Produto> listaProdutos(Integer pagina, Integer quantidade, String ordenarPor, String direcao) {
-        PageRequest pageRequest = PageRequest.of(pagina, quantidade, Sort.Direction.fromString(direcao), ordenarPor);
-        return produtoRepository.findAll(pageRequest);
+    public Page<Produto> listaProdutos(Pageable pageable) {
+        return produtoRepository.findAll(pageable);
     }
 
     public Produto getProduto(Long id) {
